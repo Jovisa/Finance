@@ -1,0 +1,55 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Portfolio
+{% endblock %}
+
+{% block main %}
+    <form action="" method="post" id="trade">
+        <div class="form-group ">
+            <input autocomplete="off" autofocus class="form-control" name="symbol" id="stock-symbol" placeholder="Symbol" type="hidden">
+            <input autocomplete="off" autofocus class="form-control" name="shares" placeholder="Shares" id="stock-shares" type="number">
+            <button class="btn btn-primary" id="buy" type="button" disabled>Buy</button>
+            <button class="btn btn-primary" id="sell" type="button" disabled>Sell</button>
+        </div>
+    </form>
+
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Symbol</th>
+                <th scope="col">Name</th>
+                <th scope="col">Shares</th>
+                <th scope="col">Price</th>
+                <th scope="col">Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in portfolio %}
+                <tr data-symbol={{ row["symbol"] }} class="stocks">
+                    <td>{{ row["symbol"] }}</td>
+                    <td>{{ row["name"] }}</td>
+                    <td>{{ row["shares"] }}</td>
+                    <td>${{ row["price"] }}</td>
+                    <td>${{ row["total"] }}</td>
+                </tr>
+            {% endfor %}
+
+            <tr>
+                <td>CASH</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td>${{ cash }}</td>
+            </tr>
+            <tr>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <th scope="row">${{ grand_total }}</th>
+            </tr>
+
+        </tbody>
+    </table>
+{% endblock %}
